@@ -14,7 +14,7 @@ builder.Services.AddMarten(op =>
 {
     op.Connection(builder.Configuration.GetConnectionString("Database")!);
 }).UseLightweightSessions();
-
+builder.Services.AddLogging(); // Ensure logging is available
 var app = builder.Build();
 
 // configure http request pipeline 
