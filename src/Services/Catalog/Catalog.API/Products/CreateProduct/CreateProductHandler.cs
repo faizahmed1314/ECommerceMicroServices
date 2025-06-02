@@ -15,21 +15,11 @@ namespace Catalog.API.Products.CreateProduct
             RuleFor(x => x.Category).NotEmpty().WithMessage("At least one category is required.");
         }
     }
-    internal class CreateProductCommandHandler(IDocumentSession session, IValidator<CreateProductCommand> validator) : ICommandHandler<CreateProductCommand, CreateProductResult>
+    internal class CreateProductCommandHandler(IDocumentSession session, ILogger<CreateProductCommandHandler> logger) : ICommandHandler<CreateProductCommand, CreateProductResult>
     {
         public async Task<CreateProductResult> Handle(CreateProductCommand command, CancellationToken cancellationToken)
         {
-            // Validate the command
-
-            var result = await validator.ValidateAsync(command, cancellationToken);
-
-            var error = result.Errors.Select(x => x.ErrorMessage).ToList();
-
-            if (error.Any())
-            {
-                throw new ValidationException(error.FirstOrDefault());
-            }
-
+            logger.LogInformation("CreateProductCommandHandler.Handle called with {@command}", command);
 
             // Create product entity froma command object
 
