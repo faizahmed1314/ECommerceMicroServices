@@ -1,26 +1,26 @@
 ﻿using Carter;
-using Catalog.API.Products.GetProducts;
 
 namespace Catalog.API.Products.DeleteProduct
 {
-    //public record DeleteProductRequest(Guid Id): 
+    //public record DeleteProductRequest(Guid Id);
     public record DeleteProductResponse(bool isDeleted);
     public class DeleteProductEndpoint : ICarterModule
     {
         public void AddRoutes(IEndpointRouteBuilder app)
         {
-            app.MapDelete("/products/{id}", async (Guid Id, ISender sender) =>
+            // Fix: Accept Id as a route parameter and fix response/produces types
+            app.MapDelete("/products/{id:guid}", async (Guid id, ISender sender) =>
             {
-                var result = await sender.Send(new DeleteProductCommand(Id));
+                var result = await sender.Send(new DeleteProductCommand(id));
                 var response = result.Adapt<DeleteProductResponse>();
                 return Results.Ok(response);
             })
-                .WithName("DeleteProducts")
-                .Produces<GetProductResponse>(StatusCodes.Status200OK)
-                .ProducesProblem(StatusCodes.Status400BadRequest)
-                .ProducesProblem(StatusCodes.Status404NotFound)
-                .WithSummary("Delete products Id")
-                .WithDescription("Delete product product by id from the database");
+            .WithName("DeleteProduct")
+            .Produces<DeleteProductResponse>(StatusCodes.Status200OK)
+            .ProducesProblem(StatusCodes.Status400BadRequest)
+            .ProducesProblem(StatusCodes.Status404NotFound)
+            .WithSummary("Delete product by Id")
+            .WithDescription("Delete product by id from the database");
         }
     }
 }
