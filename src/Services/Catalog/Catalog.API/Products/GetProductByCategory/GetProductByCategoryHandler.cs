@@ -12,9 +12,7 @@ namespace Catalog.API.Products.GetProductByCategory
             var products = await session.Query<Product>()
                 .Where(p => p.Category.Contains(query.Category)).ToListAsync(cancellationToken);
 
-            return products.Count == 0
-                ? throw new ProductNotFoundException($"No products found in category {query.Category}")
-                : new GetProductByCategoryResult(products);
+            return new GetProductByCategoryResult(products);
         }
     }
 }

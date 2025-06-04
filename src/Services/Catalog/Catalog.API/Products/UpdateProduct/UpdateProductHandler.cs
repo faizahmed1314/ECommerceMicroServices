@@ -27,7 +27,7 @@ namespace Catalog.API.Products.UpdateProduct
             var product = await session.LoadAsync<Product>(command.Id, cancellationToken);
             if (product is null)
             {
-                throw new ProductNotFoundException($"Product with id {command.Id} not found.");
+                throw new ProductNotFoundException(command.Id);
             }
             // Update the product
             product.Name = command.Name;

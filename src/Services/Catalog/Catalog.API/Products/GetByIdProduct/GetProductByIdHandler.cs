@@ -12,7 +12,7 @@
 
             if (result == null)
             {
-                throw new ProductNotFoundException();
+                throw new ProductNotFoundException(query.Id);
             }
             // return the result
             return new GetProductByIdResult(result);
