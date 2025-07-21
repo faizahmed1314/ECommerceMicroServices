@@ -24,10 +24,9 @@ builder.Services.AddMarten(op =>
 builder.Services.AddLogging(); // Ensure logging is available
 var app = builder.Build();
 
-// configure http request pipeline 
+// configure http request pipeline
 
 app.MapCarter();
-
 
 app.UseExceptionHandler(exceptionHandlerApp =>
 {
@@ -57,6 +56,5 @@ app.UseExceptionHandler(exceptionHandlerApp =>
         await context.Response.WriteAsJsonAsync(problemDetails);
     });
 });
-
 
 app.Run();
