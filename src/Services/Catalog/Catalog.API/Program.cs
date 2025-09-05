@@ -20,6 +20,7 @@ builder.Services.AddMarten(op =>
 
 if (builder.Environment.IsDevelopment())
     builder.Services.InitializeMartenWith<CatalogInitialData>();
+
 builder.Services.AddLogging(); // Ensure logging is available
 
 builder.Services.AddExceptionHandler<CustomExceptionHandler>();
