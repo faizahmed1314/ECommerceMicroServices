@@ -1,4 +1,6 @@
 
+using HealthChecks.UI.Client;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container
@@ -24,6 +26,10 @@ if (builder.Environment.IsDevelopment())
 builder.Services.AddLogging(); // Ensure logging is available
 
 builder.Services.AddExceptionHandler<CustomExceptionHandler>();
+
+builder.Services.AddHealthChecks()
+    .AddNpgSql(builder.Configuration.GetConnectionString("Database")!);
+
 var app = builder.Build();
 
 // configure http request pipeline
@@ -31,5 +37,12 @@ var app = builder.Build();
 app.MapCarter();
 
 app.UseExceptionHandler(option => { });
+
+
+app.UseHealthChecks("/health",
+    new Microsoft.AspNetCore.Diagnostics.HealthChecks.HealthCheckOptions
+    {
+        ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
+    });
 
 app.Run();
