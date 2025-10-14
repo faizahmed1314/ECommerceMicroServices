@@ -13,6 +13,12 @@ builder.Services.AddMediatR(config =>
     config.AddOpenBehavior(typeof(LoggingBehavior<,>));
 });
 
+builder.Services.AddMarten(op =>
+{
+    op.Connection(builder.Configuration.GetConnectionString("Database")!);
+    op.Schema.For<ShopingCart>().Identity(x => x.UserName);
+}).UseLightweightSessions();
+
 var app = builder.Build();
 
 // configure http request pipeline
