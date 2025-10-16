@@ -22,6 +22,20 @@ builder.Services.AddMarten(op =>
 }).UseLightweightSessions();
 
 builder.Services.AddScoped<IBasketRepository, BasketRepository>();
+builder.Services.Decorate<IBasketRepository, CachedBasketRepository>();
+// or you can do it manually like below
+//builder.Services.AddScoped<IBasketRepository>(provider =>
+//{
+//    var repository = provider.GetRequiredService<BasketRepository>();
+//    var cache = provider.GetRequiredService<IDistributedCache>();
+//    return new CachedBasketRepository(repository, cache);
+//});
+
+builder.Services.AddStackExchangeRedisCache(options =>
+{
+    options.Configuration = builder.Configuration.GetConnectionString("Redis");
+});
+
 builder.Services.AddExceptionHandler<CustomExceptionHandler>();
 var app = builder.Build();
 
