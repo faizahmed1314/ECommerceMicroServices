@@ -3,5 +3,18 @@
     public record ProductId
     {
         public Guid Value { get; }
+        private ProductId(Guid guid)
+        {
+            Value = guid;
+        }
+        public static ProductId Of(Guid value)
+        {
+            ArgumentNullException.ThrowIfNull(value);
+            if (value == Guid.Empty)
+            {
+                throw new DomainException("ProductId value cannot be empty GUID.");
+            }
+            return new ProductId(value);
+        }
     }
 }

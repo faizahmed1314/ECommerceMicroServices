@@ -9,7 +9,7 @@ namespace Ordering.Domain.Models
         public int Quantity { get; private set; }
         public OrderItem(OrderId orderId, ProductId productId, decimal price, int quantity)
         {
-            //Id = OrderItemId.Of(Guid.NewGuid());
+            Id = OrderItemId.Of(Guid.NewGuid());
             OrderId = orderId;
             ProductId = productId;
             Price = price;
