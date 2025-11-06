@@ -4,5 +4,21 @@
     {
         public string Name { get; set; }
         public decimal Price { get; set; }
+
+        public static Product Create(ProductId id, string name, decimal price)
+        {
+            ArgumentException.ThrowIfNullOrEmpty(name);
+            if (price < 0)
+            {
+                throw new ArgumentException("Price cannot be negative", nameof(price));
+            }
+            var product = new Product
+            {
+                Id = id,
+                Name = name,
+                Price = price
+            };
+            return product;
+        }
     }
 }
