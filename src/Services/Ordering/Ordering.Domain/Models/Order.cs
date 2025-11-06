@@ -1,5 +1,7 @@
 ﻿
 
+
+
 namespace Ordering.Domain.Models
 {
     public class Order : Aggregate<OrderId>
@@ -35,7 +37,7 @@ namespace Ordering.Domain.Models
                 Status = OrderStatus.Pending
             };
 
-            //order.AddDomainEvent(new OrderCreatedEvent(order));
+            order.AddDomainEvent(new OrderCreatedEvent(order));
             //order._orderItems.AddRange(orderItems);
             return order;
         }
@@ -47,7 +49,7 @@ namespace Ordering.Domain.Models
             this.BillingAddress = BillingAddress;
             Payment = payment;
             Status = status;
-            //AddDomainEvent(new OrderUpdatedEvent(this));
+            AddDomainEvent(new OrderUpdatedEvent(this));
         }
 
         public void AddOrderItem(ProductId productId, decimal price, int quantity)
@@ -66,7 +68,7 @@ namespace Ordering.Domain.Models
             if (orderItem != null)
             {
                 _orderItems.Remove(orderItem);
-                //AddDomainEvent(new OrderItemRemovedEvent(this, orderItem));
+                AddDomainEvent(new OrderItemRemovedEvent(this, orderItem));
             }
         }
     }
