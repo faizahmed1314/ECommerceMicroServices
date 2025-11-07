@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
+
 namespace Ordering.Infrastucture
 {
     public static class DependencyInjection
@@ -12,8 +13,8 @@ namespace Ordering.Infrastucture
             var connectionString = configuration.GetConnectionString("Database");
 
             // Add service to the container
-            //services.AddDbContext<ApplicationDbContext>(options =>
-            //    options.UseSqlServer(connectionString));
+            services.AddDbContext<ApplicationDbContext>(options =>
+                options.UseSqlServer(connectionString));
 
             //services.AddScoped<IApplicationDbContext, ApplicationDbContext>();
             return services;
