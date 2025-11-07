@@ -13,6 +13,47 @@ namespace Ordering.Infrastucture.Data.Extensions
             var context = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
             context.Database.MigrateAsync().GetAwaiter().GetResult();
             //await Task.CompletedTask;
+            await SeedAsync(context);
+        }
+
+        private static async Task SeedAsync(ApplicationDbContext context)
+        {
+            // Implementation for seeding initial data can be added here
+            await SeedCustomerAsync(context);
+            await SeedProductAsync(context);
+            await SeedOrderItemAsync(context);
+
+        }
+
+
+
+        private static async Task SeedCustomerAsync(ApplicationDbContext context)
+        {
+            if (!await context.Customers.AnyAsync())
+            {
+                context.Customers.AddRange(InitialData.Customer);
+                await context.SaveChangesAsync();
+            }
+        }
+
+        private static async Task SeedProductAsync(ApplicationDbContext context)
+        {
+            if (!await context.Customers.AnyAsync())
+            {
+                context.Customers.AddRange(InitialData.Product);
+                await context.SaveChangesAsync();
+            }
+        }
+
+        private static async Task SeedOrderItemAsync(ApplicationDbContext context)
+        {
+            if (!await context.Customers.AnyAsync())
+            {
+                context.Customers.AddRange(InitialData.OrderItem);
+                await context.SaveChangesAsync();
+            }
         }
     }
+
+
 }
