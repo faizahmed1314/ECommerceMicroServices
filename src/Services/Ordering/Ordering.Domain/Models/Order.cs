@@ -22,7 +22,7 @@ namespace Ordering.Domain.Models
         }
         // Additional properties and methods related to Order can be added here
 
-        public static Order Create(OrderId id, CustomerId customerId, OrderName orderName, Address shippingAddress, Address billingAddress, Payment payment, List<OrderItem> orderItems)
+        public static Order Create(OrderId id, CustomerId customerId, OrderName orderName, Address shippingAddress, Address billingAddress, Payment payment)
         {
             //ArgumentException.ThrowIfNullOrEmpty(orderItems);
             var order = new Order
@@ -34,7 +34,7 @@ namespace Ordering.Domain.Models
                 BillingAddress = billingAddress,
                 Payment = payment,
                 OrderDate = DateTime.UtcNow,
-                Status = OrderStatus.Pending
+                Status = OrderStatus.Draft
             };
 
             order.AddDomainEvent(new OrderCreatedEvent(order));

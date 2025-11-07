@@ -21,7 +21,7 @@ namespace Ordering.Infrastucture.Data.Extensions
             // Implementation for seeding initial data can be added here
             await SeedCustomerAsync(context);
             await SeedProductAsync(context);
-            await SeedOrderItemAsync(context);
+            await SeedOrderWithItemAsync(context);
 
         }
 
@@ -31,25 +31,25 @@ namespace Ordering.Infrastucture.Data.Extensions
         {
             if (!await context.Customers.AnyAsync())
             {
-                context.Customers.AddRange(InitialData.Customer);
+                context.Customers.AddRange(InitialData.Customers);
                 await context.SaveChangesAsync();
             }
         }
 
         private static async Task SeedProductAsync(ApplicationDbContext context)
         {
-            if (!await context.Customers.AnyAsync())
+            if (!await context.Products.AnyAsync())
             {
-                context.Customers.AddRange(InitialData.Product);
+                context.Products.AddRange(InitialData.Products);
                 await context.SaveChangesAsync();
             }
         }
 
-        private static async Task SeedOrderItemAsync(ApplicationDbContext context)
+        private static async Task SeedOrderWithItemAsync(ApplicationDbContext context)
         {
-            if (!await context.Customers.AnyAsync())
+            if (!await context.Orders.AnyAsync())
             {
-                context.Customers.AddRange(InitialData.OrderItem);
+                context.Orders.AddRange(InitialData.OrderWithItems);
                 await context.SaveChangesAsync();
             }
         }
