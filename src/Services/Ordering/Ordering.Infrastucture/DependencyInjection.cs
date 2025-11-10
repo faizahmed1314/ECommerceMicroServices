@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Ordering.Infrastucture.Data.Interceptor;
 
 
 namespace Ordering.Infrastucture
@@ -14,7 +15,11 @@ namespace Ordering.Infrastucture
 
             // Add service to the container
             services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlServer(connectionString));
+            {
+                options.AddInterceptors(new AuditableEntityInterceptor());
+                options.UseSqlServer(connectionString);
+            });
+
 
             //services.AddScoped<IApplicationDbContext, ApplicationDbContext>();
             return services;
