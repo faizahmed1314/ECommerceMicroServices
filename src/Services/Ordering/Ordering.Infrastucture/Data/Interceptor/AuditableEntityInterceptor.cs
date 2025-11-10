@@ -27,7 +27,7 @@ namespace Ordering.Infrastucture.Data.Interceptor
                     entry.Entity.CreatedAt = DateTime.UtcNow;
                     entry.Entity.CreatedBy = "faiz"; // TODO: Replace with actual user
                 }
-                else if (entry.State == EntityState.Added || entry.State == EntityState.Modified || entry.HasChangedOwnedEntities())
+                if (entry.State == EntityState.Added || entry.State == EntityState.Modified || entry.HasChangedOwnedEntities())
                 {
                     entry.Entity.LastModifiedAt = DateTime.UtcNow;
                     entry.Entity.LastModifiedBy = "faiz";
