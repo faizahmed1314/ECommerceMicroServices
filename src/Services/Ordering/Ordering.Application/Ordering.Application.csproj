@@ -13,7 +13,6 @@
 
 	<ItemGroup>
 		<Folder Include="Extensions\" />
-		<Folder Include="Dtos\" />
 		<Folder Include="Orders\Quries\GetOrderByName\" />
 		<Folder Include="Orders\Quries\GetOrders\" />
 		<Folder Include="Orders\Quries\GetOrdersByCustomer\" />
