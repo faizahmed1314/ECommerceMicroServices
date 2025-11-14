@@ -1,4 +1,4 @@
 ﻿namespace Ordering.Application.Dtos
 {
-    public record OrderItemDto(Guid OrderId, Guid ProductId, string ProductName, decimal UnitPrice, int Quantity);
+    public record OrderItemDto(Guid OrderId, Guid ProductId, decimal UnitPrice, int Quantity);
 }
