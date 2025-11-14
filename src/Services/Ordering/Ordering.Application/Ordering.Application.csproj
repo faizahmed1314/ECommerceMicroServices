@@ -12,7 +12,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<Folder Include="Extensions\" />
 		<Folder Include="Orders\Quries\GetOrders\" />
 		<Folder Include="Orders\Quries\GetOrdersByCustomer\" />
 	</ItemGroup>
