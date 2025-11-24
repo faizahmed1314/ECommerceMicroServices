@@ -1,6 +1,8 @@
-﻿namespace Ordering.Application.Orders.Quries.GetOrders
-{
-    public record GetOrdersQuery : IQuery<GetOrdersResult>;
+﻿using BuildingBlocks.Pagination;
 
-    public record GetOrdersResult(IEnumerable<OrderDto> Orders);
+namespace Ordering.Application.Orders.Quries.GetOrders
+{
+    public record GetOrdersQuery(PaginationRequest PaginationRequest) : IQuery<GetOrdersResult>;
+
+    public record GetOrdersResult(PaginationResult<OrderDto> Orders);
 }
