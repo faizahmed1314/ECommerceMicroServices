@@ -1,7 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Ordering.Application.Extensions;
-
-namespace Ordering.Application.Orders.Quries.GetOrderByName
+﻿namespace Ordering.Application.Orders.Quries.GetOrderByName
 {
     public class GetOrderByNamehandler(IApplicationDBContext dBContext) : IQueryHandler<GetOrderByNameQuery, GetOrderByNameResult>
     {
@@ -9,6 +6,7 @@ namespace Ordering.Application.Orders.Quries.GetOrderByName
         {
             var orderlist = await dBContext.Orders
                 .Include(o => o.OrderItems)
+                .AsNoTracking()
                 .Where(o => o.OrderName.Value.Contains(query.Name))
                 .OrderBy(o => o.OrderName.Value)
                 .ToListAsync(cancellationToken);
