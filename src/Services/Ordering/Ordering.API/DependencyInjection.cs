@@ -1,4 +1,4 @@
-﻿using Carter;
+﻿using BuildingBlocks.Exceptions.Handler;
 
 namespace Ordering.API
 {
@@ -9,6 +9,7 @@ namespace Ordering.API
             // Add API services registrations here
 
             services.AddCarter();
+            services.AddExceptionHandler<CustomExceptionHandler>();
             return services;
         }
 
@@ -16,6 +17,9 @@ namespace Ordering.API
         {
             // Configure the HTTP request pipeline for API services here
             app.MapCarter();
+            app.UseExceptionHandler(options =>
+            {
+            });
             return app;
         }
     }
