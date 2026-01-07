@@ -22,11 +22,11 @@ namespace Ordering.Application.Orders.Commands.CreateOrder
         private Order CreateNewOrder(OrderDto order)
         {
             var billingAddress = Address.Of(order.BillingAddress.FirstName, order.BillingAddress.LastName,
-                order.BillingAddress.EmailAddess, order.BillingAddress.AddressLine,
+                order.BillingAddress.EmailAddress, order.BillingAddress.AddressLine,
                 order.BillingAddress.Streat, order.BillingAddress.PostalCode,
                 order.BillingAddress.City, order.BillingAddress.State, order.BillingAddress.Country);
 
-            var shippingAddress = Address.Of(order.ShippingAddress.FirstName, order.ShippingAddress.LastName, order.ShippingAddress.EmailAddess,
+            var shippingAddress = Address.Of(order.ShippingAddress.FirstName, order.ShippingAddress.LastName, order.ShippingAddress.EmailAddress,
                 order.ShippingAddress.AddressLine, order.ShippingAddress.Streat,
                 order.ShippingAddress.PostalCode, order.ShippingAddress.City,
                 order.ShippingAddress.State, order.ShippingAddress.Country);
@@ -38,7 +38,7 @@ namespace Ordering.Application.Orders.Commands.CreateOrder
                 shippingAddress: shippingAddress,
                 billingAddress: billingAddress,
                 Payment.Of(order.Payment.PaymentMethod, order.Payment.CardNumber,
-                    order.Payment.CardHolderName, order.Payment.Cvv, order.Payment.Expiration)
+                    order.Payment.CardHolderName, order.Payment.Expiration, order.Payment.Cvv)
             );
 
             foreach (var item in order.OrderItems)
