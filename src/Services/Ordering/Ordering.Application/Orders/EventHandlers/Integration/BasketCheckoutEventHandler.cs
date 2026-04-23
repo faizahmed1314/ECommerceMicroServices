@@ -37,8 +37,8 @@ namespace Ordering.Application.Orders.EventHandlers.Integration
                 OrderItems:
                 [
                     // change the guid with actual product ids and unit prices and quantities based on the incoming event data (message)
-                    new OrderItemDto(orderId, Guid.NewGuid(), 500, 2), // Example item with total price as unit price and quantity of 1
-                    new OrderItemDto(orderId, Guid.NewGuid(), 400, 1) // Example item with total price as unit price and quantity of 1
+                    new OrderItemDto(orderId, Guid.Parse("e1a2b3c4-d5e6-7f8a-9b0c-d1e2f3a4b5c6"), 1200, 2), // Example item with total price as unit price and quantity of 1
+                    new OrderItemDto(orderId, Guid.Parse("f6e5d4c3-b2a1-0f9e-8d7c-6b5a4e3d2c1b"), 700, 1) // Example item with total price as unit price and quantity of 1
                 ]);
 
             return new CreateOrderCommand(orderDto);
