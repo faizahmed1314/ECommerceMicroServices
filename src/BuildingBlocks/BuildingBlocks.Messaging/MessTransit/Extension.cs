@@ -23,7 +23,7 @@ namespace BuildingBlocks.Messaging.MessTransit
 
                 config.UsingRabbitMq((context, cfg) =>
                 {
-                    cfg.Host(new Uri(configuration["MessageBroker: Host"]!), h =>
+                    cfg.Host(new Uri(configuration["MessageBroker:Host"]!), h =>
                     {
                         // You can configure username and password here if needed
                         h.Username(configuration["MessageBroker:UserName"]);

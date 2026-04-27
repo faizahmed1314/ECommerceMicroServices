@@ -13,6 +13,12 @@ var builder = WebApplication.CreateBuilder(args);
 // Application services
 builder.Services.AddCarter();
 
+// Configure JSON options for case-insensitive property matching
+builder.Services.ConfigureHttpJsonOptions(options =>
+{
+    options.SerializerOptions.PropertyNameCaseInsensitive = true;
+});
+
 var assembly = typeof(Program).Assembly;
 builder.Services.AddMediatR(config =>
 {
